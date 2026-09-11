@@ -1,0 +1,34 @@
+//write a program that maintain EMP_UPDATE whenever salary is increased, whenever salary is raised for employees, maintain a record in the EMP_UPDATE table. Perform using both implicit and explicit cursor.
+
+CREATE TABLE EMP_UPDATE
+(
+    EMPNO       NUMBER,
+    ENAME       VARCHAR2(20),
+    OLD_SAL     NUMBER,
+    NEW_SAL     NUMBER,
+    UPDATE_DATE DATE
+);
+
+SET SERVEROUTPUT ON;
+
+BEGIN
+    INSERT INTO EMP_UPDATE
+    SELECT EMPNO,
+           ENAME,
+           SAL,
+           SAL * 1.10,
+           SYSDATE
+    FROM EMP
+    WHERE DEPTNO = 10;
+
+    UPDATE EMP
+    SET SAL = SAL * 1.10
+    WHERE DEPTNO = 10;
+
+    DBMS_OUTPUT.PUT_LINE(
+        SQL%ROWCOUNT || ' employee(s) updated.'
+    );
+
+    COMMIT;
+END;
+/
