@@ -1,0 +1,9 @@
+BEGIN
+  FRO r IN
+  (SELECT*
+   FROM Employment
+   WHERE GENDER='M'
+   AND DEPTNAME='HR')
+ LOOP
+  DBMS_OUTPUT.PUT_LINE(
+)
